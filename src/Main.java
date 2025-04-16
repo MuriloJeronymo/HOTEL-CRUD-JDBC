@@ -1,3 +1,4 @@
+import DAO.ClientDAO;
 import DAO.DB;
 import DAO.DaoFactory;
 import DAO.RoomDAO;
@@ -18,9 +19,14 @@ import java.util.Scanner;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) throws ParseException {
-      RoomDAO roomDAO = DaoFactory.createRoomDAO();
-      Room room = new Room(10,200.0, RoomStatus.available);
-      roomDAO.insertRoom(room);
+         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        RoomDAO roomDAO = DaoFactory.createRoomDAO();
+      ClientDAO clientDAO = DaoFactory.createClientDAO();
+
+      Client client = new Client("31312321","murilo",LocalDate.parse("20/04/2004", dtf),"murilojeronymo@hotmail.com" );
+      clientDAO.insert(client);
+      roomDAO.deleteRoom(10);
 
 
     }

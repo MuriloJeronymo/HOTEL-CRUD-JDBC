@@ -6,9 +6,9 @@ public class DaoFactory {
         return new RoomDaoImpl(DB.getConnection());
     }
 
-    /*public static ClientDAO createClientDAO() {
+    public static ClientDAO createClientDAO() {
         return new ClientDaoImpl(DB.getConnection());
-    }*/
+    }
 
     public static ReservationDAO createReservationDAO() {
         return new ReservationDaoImpl(DB.getConnection());

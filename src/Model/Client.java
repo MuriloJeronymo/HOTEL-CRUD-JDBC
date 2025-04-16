@@ -5,14 +5,14 @@ import java.time.LocalDate;
 public class Client {
     private String CPF;
     private String name;
-    private String email;
     private LocalDate birthDate;
+    private String email;
 
-    public Client(String CPF, String name,String email, LocalDate birthDate) {
+    public Client(String CPF, String name, LocalDate birthDate,String email) {
         this.CPF = CPF;
         this.name = name;
-        this.email = email;
         this.birthDate = birthDate;
+        this.email = email;
     }
     public String getCPF() {
         return CPF;

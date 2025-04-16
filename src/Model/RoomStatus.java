@@ -2,5 +2,6 @@ package Model;
 
 public enum RoomStatus {
     available,
-    unavailable
+    unavailable,
+    unusable
 }
