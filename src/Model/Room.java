@@ -3,10 +3,12 @@ package Model;
 public class Room {
     private int number;
     private Double pricePerDay;
+    private RoomStatus status;
 
-    public Room(int number, Double pricePerDay) {
+    public Room(int number, Double pricePerDay, RoomStatus status) {
         this.number = number;
         this.pricePerDay = pricePerDay;
+        this.status = status;
     }
 
     public int getNumber() {
@@ -21,6 +23,12 @@ public class Room {
     }
     public void setPricePerDay(Double pricePerDay) {
         this.pricePerDay = pricePerDay;
+    }
+    public RoomStatus getStatus() {
+        return status;
+    }
+    public void setStatus(RoomStatus status) {
+        this.status = status;
     }
 
     @Override

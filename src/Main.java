@@ -1,7 +1,10 @@
 import DAO.DB;
+import DAO.DaoFactory;
+import DAO.RoomDAO;
 import Model.Client;
 import Model.Reservation;
 import Model.Room;
+import Model.RoomStatus;
 
 import java.time.LocalDate;
 import java.sql.Connection;
@@ -15,35 +18,9 @@ import java.util.Scanner;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) throws ParseException {
-        Scanner sc = new Scanner(System.in);
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
-        System.out.println("enter room infos");
-        int number = sc.nextInt();
-        Double price = sc.nextDouble();
-        Room room = new Room(number, price);
-
-        System.out.println("enter the days");
-        LocalDate startDay = LocalDate.parse(sc.next(), dtf);
-        LocalDate endDay = LocalDate.parse(sc.next(), dtf);
-        Reservation res = new Reservation(room,startDay,endDay);
-
-        System.out.println("How many clients?");
-        int n = sc.nextInt();
-        for (int i = 0; i < n; i++) {
-            System.out.println("enter client infos");
-            String cpf = sc.next();
-            String name = sc.next();
-            LocalDate birthDate = LocalDate.parse(sc.next(), dtf);
-            Client client = new Client(cpf, name, birthDate);
-            res.addClient(client);
-        }
-
-        System.out.println("Valor Total");
-        System.out.println(res.totalValue());
-
-
-        System.out.println(res);
+      RoomDAO roomDAO = DaoFactory.createRoomDAO();
+      Room room = new Room(10,200.0, RoomStatus.available);
+      roomDAO.insertRoom(room);
 
 
     }
