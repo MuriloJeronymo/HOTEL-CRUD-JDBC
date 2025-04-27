@@ -14,7 +14,7 @@ public class ReservationDaoImpl implements ReservationDAO{
         this.conn = conn;
     }
     @Override
-    public void inser(Reservation reservation) {
+    public void insert(Reservation reservation) {
         PreparedStatement st = null;
         try{
             st = conn.prepareStatement("insert into reservation values(?,?,?,?,?)");
@@ -46,6 +46,21 @@ public class ReservationDaoImpl implements ReservationDAO{
        catch(Exception e){
            e.printStackTrace();
        }
+        return null;
+    }
+
+    @Override
+    public Reservation findByRoomNumber(int roomNumber) {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try{
+            st = conn.prepareStatement("select * from reservation where roomNumber = ?");
+            st.setInt(1, roomNumber);
+            rs = st.executeQuery();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
         return null;
     }
 }

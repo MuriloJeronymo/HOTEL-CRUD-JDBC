@@ -1,5 +1,6 @@
 package DAO;
 
+import Model.Client;
 import Model.Room;
 import Model.RoomStatus;
 
@@ -131,6 +132,29 @@ public class RoomDaoImpl implements RoomDAO{
                 unavailableRooms.add(room);
             }
             return unavailableRooms;
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public Room getRoom(int number) {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try{
+            st = conn.prepareStatement("select * from room where roomNumber=?");
+            st.setInt(1,number);
+            rs = st.executeQuery();
+
+            if(rs.next()){
+                Integer roomNumber = rs.getInt("roomNumber");
+                Double pricePerDay = rs.getDouble("pricePerDay");
+                RoomStatus status = RoomStatus.valueOf(rs.getString("status"));
+                Room room = new Room(roomNumber,pricePerDay,status);
+                return room;
+            }
         }
         catch(Exception e){
             e.printStackTrace();

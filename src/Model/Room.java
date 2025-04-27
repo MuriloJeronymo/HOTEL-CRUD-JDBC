@@ -5,6 +5,12 @@ public class Room {
     private Double pricePerDay;
     private RoomStatus status;
 
+    public Room(int number, Double pricePerDay) {
+        this.number = number;
+        this.pricePerDay = pricePerDay;
+    }
+
+
     public Room(int number, Double pricePerDay, RoomStatus status) {
         this.number = number;
         this.pricePerDay = pricePerDay;

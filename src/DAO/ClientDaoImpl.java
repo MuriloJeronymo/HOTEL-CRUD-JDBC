@@ -5,6 +5,7 @@ import Model.Client;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class ClientDaoImpl implements ClientDAO {
     private Connection conn;
@@ -47,12 +48,39 @@ public void update(Client client) {
 }
 
     @Override
-    public void delete(Client client) {
-
+    public void delete(String CPF) {
+       PreparedStatement st = null;
+        try{
+            st = conn.prepareStatement("delete from Client where cpf=? ");
+            st.setString(1,CPF);
+            st.executeUpdate();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public Client getClient(int id) {
+    public Client getClient(String CPF) {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try{
+            st = conn.prepareStatement("select * from Client where cpf=?");
+            st.setString(1,CPF);
+            rs = st.executeQuery();
+
+            if(rs.next()){
+                String cpf = rs.getString("cpf");
+                String name = rs.getString("name");
+                java.sql.Date birthDate = rs.getDate("birth_date");
+                String email = rs.getString("email");
+                Client client = new Client(cpf,name, birthDate.toLocalDate(),email);
+                return client;
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
         return null;
     }
 }

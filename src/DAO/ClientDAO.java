@@ -5,6 +5,6 @@ import Model.Client;
 public interface ClientDAO {
     void insert(Client client);
     void update(Client client);
-    void delete(Client client);
-    Client getClient(int id);
+    void delete(String CPF);
+    Client getClient(String CPF);
 }

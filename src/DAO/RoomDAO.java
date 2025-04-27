@@ -12,6 +12,7 @@ public interface RoomDAO {
     void deleteRoom(int number);
     List<Room> getAvailableRooms();
     List<Room> getUnavailableRooms();
+    Room getRoom(int number);
 
 
 }

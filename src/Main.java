@@ -27,6 +27,7 @@ public class Main {
       Client client = new Client("31312321","murilo",LocalDate.parse("20/04/2004", dtf),"murilojeronymo@hotmail.com" );
       clientDAO.insert(client);
       roomDAO.deleteRoom(10);
+      System.out.print("ads");
 
 
     }
