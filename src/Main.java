@@ -1,3 +1,4 @@
+import Control.ReservationController;
 import DAO.ClientDAO;
 import DAO.DB;
 import DAO.DaoFactory;
@@ -6,6 +7,7 @@ import Model.Client;
 import Model.Reservation;
 import Model.Room;
 import Model.RoomStatus;
+import View.HotelView;
 
 import java.time.LocalDate;
 import java.sql.Connection;
@@ -20,15 +22,17 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws ParseException {
          DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
-        RoomDAO roomDAO = DaoFactory.createRoomDAO();
+         /*RoomDAO roomDAO = DaoFactory.createRoomDAO();
       ClientDAO clientDAO = DaoFactory.createClientDAO();
 
       Client client = new Client("31312321","murilo",LocalDate.parse("20/04/2004", dtf),"murilojeronymo@hotmail.com" );
       clientDAO.insert(client);
       roomDAO.deleteRoom(10);
       System.out.print("ads");
+       */
 
+       HotelView hotelView = new HotelView();
+       hotelView.viewHotel();
 
     }
 }
