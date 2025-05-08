@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ClientDaoImpl implements ClientDAO {
     private Connection conn;
@@ -35,11 +37,12 @@ public class ClientDaoImpl implements ClientDAO {
 public void update(Client client) {
     PreparedStatement st = null;
     try{
-        st = conn.prepareStatement("update Client set name=?,birth_date=?,email=? where cpf=? ");
+        st = conn.prepareStatement("update Client set name=? ,birth_date=? ,email=? where cpf=? ");
         st.setString(1,client.getName());
         java.sql.Date sqlDate = java.sql.Date.valueOf(client.getBirthDate());
         st.setDate(2,sqlDate);
         st.setString(3,client.getEmail());
+        st.setString(4,client.getCPF());
         st.executeUpdate();
     }
     catch(Exception e){
@@ -77,6 +80,32 @@ public void update(Client client) {
                 Client client = new Client(cpf,name, birthDate.toLocalDate(),email);
                 return client;
             }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public List<Client> getAllClients() {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try{
+            st = conn.prepareStatement("SELECT client.cpf, client.name, client.email, client.birth_date, reservationclient.reservationId FROM client LEFT JOIN reservationclient ON client.cpf = reservationclient.cpf;");
+            rs = st.executeQuery();
+
+            while(rs.next()){
+              String cpf = rs.getString("cpf");
+              String name = rs.getString("name");
+              String email = rs.getString("email");
+              Date birthDate = rs.getDate("birth_date");
+              String reservationId = rs.getString("reservationId");
+              System.out.println(cpf + " " + name + " " + email + " " + birthDate + " " + reservationId);
+
+            }
+
+
         }
         catch(Exception e){
             e.printStackTrace();

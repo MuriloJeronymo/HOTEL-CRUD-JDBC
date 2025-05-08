@@ -1,0 +1,35 @@
+[33mcommit 7fa29749f98695fcad8a896bc8381adfe0cc8bf4[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;32mtratamento-excecoes[m[33m)[m
+Author: Murilo Jeronymo <murilojeronymo@hotmail.com>
+Date:   Mon Apr 28 11:48:55 2025 -0300
+
+    Criacao das views para organizacao dos metodos que criarei na controller em seguida
+
+[33mcommit a2d55c58c2145d5049e17efc44a1426450807ac6[m
+Author: Murilo Jeronymo <murilojeronymo@hotmail.com>
+Date:   Sun Apr 27 17:34:11 2025 -0300
+
+    ...
+
+[33mcommit b12c2425a952494a2f6ffa69bfbdb324b9cf39b8[m
+Author: Murilo Jeronymo <murilojeronymo@hotmail.com>
+Date:   Wed Apr 16 00:49:03 2025 -0300
+
+    Foi feito alguns metodos dos DAOS (finalizado o RoomDAO e iniciado outros)
+
+[33mcommit 4e7d12e5f4f9423a73151959b578adf84821b669[m
+Author: Murilo Jeronymo <murilojeronymo@hotmail.com>
+Date:   Tue Apr 15 22:29:17 2025 -0300
+
+    Criacao dos DAOS e insert do Room
+
+[33mcommit 4e03efc2d3b610c5e5b8c0654ec6817bd0cb0385[m
+Author: Murilo Jeronymo <murilojeronymo@hotmail.com>
+Date:   Tue Apr 15 13:43:48 2025 -0300
+
+    Inicio da criacao dos models
+
+[33mcommit 1fc0bfc9047b1c20dd52fa32d113ce80fb6f6cef[m
+Author: Murilo Jeronymo <murilojeronymo@hotmail.com>
+Date:   Tue Apr 15 11:29:47 2025 -0300
+
+    Foi feita a preparacao da IDE e a conexao com o banco de dados

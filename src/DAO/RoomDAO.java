@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface RoomDAO {
     void insertRoom(Room room);
+    void updateRoomPrice (int number, double newPrice);
     void updateRoom(Room room);
     void updateRoomStatusToAvailable(int number);
     void updateRoomStatusToUnavailable(int number);

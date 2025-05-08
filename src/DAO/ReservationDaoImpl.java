@@ -19,7 +19,6 @@ public class ReservationDaoImpl implements ReservationDAO{
     public void insert(Reservation reservation) {
         PreparedStatement st = null;
         try {
-            // Primeiro, inserimos na tabela reservation
             st = conn.prepareStatement("INSERT INTO reservation (roomNumber, startDate, endDate, totalValue) VALUES (?, ?, ?, ?)",
                     PreparedStatement.RETURN_GENERATED_KEYS);
             st.setInt(1, reservation.getRoom().getNumber());
@@ -28,14 +27,12 @@ public class ReservationDaoImpl implements ReservationDAO{
             st.setDouble(4, reservation.totalValue());
             st.executeUpdate();
 
-            // Obter o ID da reserva gerado
             ResultSet rs = st.getGeneratedKeys();
             int reservationId = 0;
             if (rs.next()) {
                 reservationId = rs.getInt(1);
             }
 
-            // Agora, inserimos na tabela de relacionamento reservation_client para cada cliente
             for (Client client : reservation.getClients()) {
                 PreparedStatement st2 = conn.prepareStatement("INSERT INTO reservationclient (reservationId, cpf) VALUES (?, ?)");
                 st2.setInt(1, reservationId);

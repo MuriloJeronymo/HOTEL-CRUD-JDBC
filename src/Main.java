@@ -21,16 +21,6 @@ import java.util.Scanner;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) throws ParseException {
-         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-         /*RoomDAO roomDAO = DaoFactory.createRoomDAO();
-      ClientDAO clientDAO = DaoFactory.createClientDAO();
-
-      Client client = new Client("31312321","murilo",LocalDate.parse("20/04/2004", dtf),"murilojeronymo@hotmail.com" );
-      clientDAO.insert(client);
-      roomDAO.deleteRoom(10);
-      System.out.print("ads");
-       */
-
        HotelView hotelView = new HotelView();
        hotelView.viewHotel();
 

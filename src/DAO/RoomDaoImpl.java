@@ -35,6 +35,26 @@ public class RoomDaoImpl implements RoomDAO{
     }
 
     @Override
+    public void updateRoomPrice(int number, double newPrice) {
+        PreparedStatement st = null;
+        try {
+            Room existingRoom = getRoom(number);
+            if (existingRoom == null) {
+                System.out.println("Room " + number + " not found!");
+                return;
+            }
+
+            st = conn.prepareStatement("update room set pricePerDay=? where roomNumber=?");
+            st.setDouble(1, newPrice);
+            st.setInt(2, number);
+            st.executeUpdate();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public void updateRoom(Room room) {
         PreparedStatement st = null;
         try{
@@ -56,6 +76,7 @@ public class RoomDaoImpl implements RoomDAO{
               st = conn.prepareStatement("update Room set status=? where number=?");
               st.setString(1, String.valueOf(RoomStatus.available));
               st.setInt(2, number);
+              st.executeUpdate();
           }
           catch(Exception e){
               e.printStackTrace();
@@ -65,9 +86,10 @@ public class RoomDaoImpl implements RoomDAO{
     public void updateRoomStatusToUnavailable(int number) {
         PreparedStatement st = null;
         try{
-            st = conn.prepareStatement("update Room set status=? where number=?");
+            st = conn.prepareStatement("update room set STATUS=? where roomNumber=?");
             st.setString(1, String.valueOf(RoomStatus.unavailable));
             st.setInt(2, number);
+            st.executeUpdate();
         }
         catch(Exception e){
             e.printStackTrace();
@@ -78,7 +100,7 @@ public class RoomDaoImpl implements RoomDAO{
     public void deleteRoom(int number) {    //NAO SEI SE FAZ SENTIDO DELETAR UM ROOM, MAS CRIADO O METODO CASO NECESSARIO
          PreparedStatement st = null;
          try{
-             st = conn.prepareStatement("DELETE FROM Room WHERE roomNumber=?");
+             st = conn.prepareStatement("DELETE FROM room WHERE roomNumber=?");
              st.setInt(1,number);
              st.executeUpdate();
          }
@@ -92,18 +114,22 @@ public class RoomDaoImpl implements RoomDAO{
         PreparedStatement st = null;
         ResultSet rs = null;
         try{
-            st = conn.prepareStatement("select * from Room where STATUS = 'available'");
+            st = conn.prepareStatement("select * from room where STATUS = 'available'");
             rs = st.executeQuery();
 
             List<Room> availableRooms = new ArrayList<Room>();
 
             while(rs.next()){
-                int number = rs.getInt("number");
+                int number = rs.getInt("roomNumber");
                 double pricePerDay = rs.getDouble("pricePerDay");
-                RoomStatus status = RoomStatus.valueOf(rs.getString("status"));
+                RoomStatus status = RoomStatus.valueOf(rs.getString("STATUS"));
                 Room room = new Room(number,pricePerDay,status);
 
                 availableRooms.add(room);
+
+            }
+            for (Room roomsA : availableRooms) {
+                System.out.println(roomsA);
             }
             return availableRooms;
         }
@@ -118,18 +144,22 @@ public class RoomDaoImpl implements RoomDAO{
         PreparedStatement st = null;
         ResultSet rs = null;
         try{
-            st = conn.prepareStatement("select * from Room where STATUS = 'unavailable'");
+            st = conn.prepareStatement("select * from room where STATUS = 'unavailable'");
             rs = st.executeQuery();
 
             List<Room> unavailableRooms = new ArrayList<Room>();
 
             while(rs.next()){
-                int number = rs.getInt("number");
+                int number = rs.getInt("roomNumber");
                 double pricePerDay = rs.getDouble("pricePerDay");
-                RoomStatus status = RoomStatus.valueOf(rs.getString("status"));
+                RoomStatus status = RoomStatus.valueOf(rs.getString("STATUS"));
                 Room room = new Room(number,pricePerDay,status);
 
                 unavailableRooms.add(room);
+
+                }
+            for(Room roomsU : unavailableRooms){
+                System.out.println(roomsU);
             }
             return unavailableRooms;
         }

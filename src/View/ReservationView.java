@@ -1,9 +1,15 @@
 package View;
 
+import Control.ReservationController;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class ReservationView {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     Scanner sc = new Scanner(System.in);
+    ReservationController reservationController = new ReservationController();
 
     public void viewReservation() {
         int reservOpt;
@@ -17,7 +23,27 @@ public class ReservationView {
 
             switch (reservOpt) {
                 case 1:
-                    //check in
+                    System.out.println("Add Client: ");
+                    System.out.println("CPF: ");
+                    String cpf = sc.next();
+                    System.out.println("Name: ");
+                    String name= sc.next();
+                    sc.nextLine();
+                    System.out.println("Birth Date: ");
+                    LocalDate birthDate = LocalDate.parse(sc.nextLine(), formatter);
+                    System.out.println("Email: ");
+                    String email = sc.next();
+                    sc.nextLine();
+                    System.out.println("Room Number: ");
+                    int roomNumber = sc.nextInt();
+                    sc.nextLine();
+                    System.out.println("Start Day: ");
+                    LocalDate startDate = LocalDate.parse( sc.nextLine(), formatter);
+                    System.out.println("End Day: ");
+                    LocalDate endDate = LocalDate.parse( sc.nextLine(), formatter);
+                    reservationController.checkIn(cpf, name, birthDate, email, roomNumber, startDate, endDate);
+
+
                     break;
                 case 2:
                     // check out

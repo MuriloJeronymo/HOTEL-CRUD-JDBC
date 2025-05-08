@@ -15,11 +15,8 @@ public class ReservationController {
 
 
     public void checkIn(String cpf, String name, LocalDate birthDate, String email, int roomNumber, LocalDate startDate, LocalDate endDate) {
-        Client client = clientDAO.getClient(cpf);
-        if (client == null) {
-            client = new Client(cpf, name, birthDate, email);
-            clientDAO.insert(client);
-        }
+        ClientController clientController = new ClientController();
+        Client client = clientController.addClient(cpf, name, birthDate, email);
 
         Room room = roomDAO.getRoom(roomNumber);
         if (room == null) {
